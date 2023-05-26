@@ -10,7 +10,8 @@ import {
   faSnowflake,
   faWind,
   faTint,
-  faCompass
+  faCompass,
+  faMoon
 } from "@fortawesome/free-solid-svg-icons";
 
 const API_KEY = "f004216171243428fa4af886309b025e"; // Replace with your OpenWeatherMap API key
@@ -56,7 +57,10 @@ const WeatherApp = () => {
     return (kelvin - 273.15).toFixed(2);
   };
 
+
   const getWeatherIcon = (iconCode) => {
+    const dayTime = iconCode.includes("d"); // Check if it's daytime or nighttime
+  
     switch (iconCode) {
       case "01d":
         return <FontAwesomeIcon icon={faSun} />;
@@ -71,7 +75,11 @@ const WeatherApp = () => {
       case "13d":
         return <FontAwesomeIcon icon={faSnowflake} />;
       default:
-        return <FontAwesomeIcon icon={faSun} />;
+        return dayTime ? (
+          <FontAwesomeIcon icon={faSun} />
+        ) : (
+          <FontAwesomeIcon icon={faMoon} />
+        );
     }
   };
 
